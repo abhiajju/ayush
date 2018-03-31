@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Calculator</title>
+    <title>Speech to text converter in JS</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.1/css/font-awesome.min.css" />
@@ -44,6 +44,9 @@
       #synonymw {
         color: red;
       }
+      #una {
+        display: none;
+      }
     </style>
   </head>
 
@@ -51,8 +54,17 @@
     
     <div class="container">
       <button class="right btn btn-primary btn-md" role="button"><a href="index.html">Home</a></button>
-      <h3> Converter from Ayurveda Metric System To Modern Metric System </h3>
+      <h3> Converter from Ayurveda/Unani Metric System To Modern Metric System </h3>
+      <ul class="nav nav-pills">
+        <li class="nav-item">
+          <a class="nav-link active toggle"  id="ayul"href="#">Ayurveda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link toggle"  id="unal" href="#">Unani</a>
+        </li>
+      </ul>
       <hr>
+      <div id="ayu">
       <div class="row">
         <div class="col-lg-6 col-sm-12 portfolio-item">
           <h4> Time Converter </h4>
@@ -311,11 +323,92 @@
           </div>
         </div>
       </div>
+    </div>
+    <div id="una">
+      <div class="row" >
+        <div class="col-lg-6 col-sm-12 portfolio-item">
+          <h4> Weight Converter </h4>
+          <div class="input-group ">
+            <input type="text" class="form-control" aria-label="Text input with dropdown button" id="timeayu" type="number" oninput="TimeConverter1(this.value)" onchange="TimeConverter1(this.value)" placeholder="Ayurveda/Modern"> 
+            <select class="form-control" id="tim11" data-size="auto" name="Time Unit" onchange="TimeConverter1($('#timeayu').val())">
+              <option value="GRAIN">GRAIN</option>
+              <option value="CHAWAL">CHAWAL</option>
+              <option value="JO">JO</option>
+              <option value="RATTI">RATTI</option>
+              <option value="SUKHA">SUKHA</option>
+              <option value="DANGA">DANGA</option>
+              <option value="MASHA">MASHA</option>
+              <option value="MISKALA">MISKALA</option>
+              <option value="TOLA">TOLA</option>
+              <option value="RUPYA">RUPYA</option>
+              <option value="AAQYA">AAQYA</option>
+              <option value="RATALA">RATALA</option>
+              <option value="SERA">SERA</option>
+              <option value="MILLIGRAMS">MILLIGRAMS</option>
+              <option value="GRAMS">GRAMS</option>
+              <option value="KILOGRAMS">KILOGRAMS</option>
+            </select>
+          </div>
+          <div class="input-group ">
+            <input type="text" class="form-control" id="sec1" type="number" placeholder="Ayurveda">
+            <select class="form-control" id="tim21" data-size="auto" name="Time Unit" onchange="TimeConverter1($('#timeayu').val())">
+               <option value="GRAIN">GRAIN</option>
+              <option value="CHAWAL">CHAWAL</option>
+              <option value="JO">JO</option>
+              <option value="RATTI">RATTI</option>
+              <option value="SUKHA">SUKHA</option>
+              <option value="DANGA">DANGA</option>
+              <option value="MASHA">MASHA</option>
+              <option value="MISKALA">MISKALA</option>
+              <option value="TOLA">TOLA</option>
+              <option value="RUPYA">RUPYA</option>
+              <option value="AAQYA">AAQYA</option>
+              <option value="RATALA">RATALA</option>
+              <option value="SERA">SERA</option>
+            </select>
+          </div>
+          <div class="input-group ">
+            <input type="text" class="form-control" id="hr1" type="number" placeholder="Modern">
+            <select class="form-control" id="tim31" data-size="auto" name="Time Unit" onchange="TimeConverter1($('#timeayu').val())">
+              <option value="MILLIGRAMS">MILLIGRAMS</option>
+              <option value="GRAMS">GRAMS</option>
+              <option value="KILOGRAMS">KILOGRAMS</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="col-lg-6 col-sm-12 portfolio-item">
+          <h4> Volume Converter </h4>
+          <div class="input-group ">
+            <input type="text" class="form-control" aria-label="Text input with dropdown button" id="wtayu" type="number" oninput="WeightConverter(this.value)" onchange="WeightConverter(this.value)" placeholder="Ayurveda/Modern"> 
+            <select class="form-control" id="wtmod" name="Weight Unit">
+              <option value="TOLA">TOLA</option>
+              <option value="MILLILITRES">MILLILITRES</option>
+              <option value="LITRES">LITRES</option>
+            </select>
+          </div>
+          <div class="input-group ">
+            <input type="text" class="form-control" id="lmodm" type="number" placeholder="Modern">
+            <select class="form-control" id="lenmodm" name="Length Unit" onchange="LengthConverter($('#lenayu').val())">
+              <option value="MILLILITRES">MILLILITRES</option>
+              <option value="LITRES">LITRES</option>
+            </select>
+          </div>
+        </div>
+        
+       </div>
     </div> 
+  </div>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
     <script>
+      $(".toggle").on("click", function() {
+        $("#ayu").toggle();
+        $("#ayul").toggleClass('active');
+        $("#unal").toggleClass('active');
+        $("#una").toggle();
+      });
       function LengthConverter(valNum) {
         $("#synonyml").text("");
         var lena=["YAVODARA","ANGULA","BITAHASTI","AARATNI","HASTI","RAJAHASTA","NRIPAHASTA","VYAM","INCHES","MILLIMETERS","CENTIMETERS","METERS","KILOMETERS","FEET"];
@@ -430,6 +523,43 @@
         }
 
       }
+      function TimeConverter1(valNum) {
+
+            var timea=["GRAIN","CHAWAL","JO","RATTI","SUKHA","DANGA","MASHA","MISKALA","TOLA","RUPYA","AAQYA","RATALA","SERA","MILLIGRAMS","GRAMS","KILOGRAMS"];
+
+            var timem=[15.58,15.58,63.32,125,125,500,970,4500,11664,57326,350000,468500,937000,1,1000,1000000];
+
+        var value1=$("#tim11").val();
+        var value2=$("#tim21").val();
+        var value3=$("#tim31").val();
+
+        var i,j;
+
+        for(i=0;i<timea.length;i++) {
+          if(value1==timea[i]) {
+            for(j=0;j<timea.length;j++) {
+              if(value2==timea[j]) {
+               // var nval = valNum*
+                var nval=valNum*timem[i];
+                //var dval=timem[j];
+                var fval=nval/timem[j];
+                //alert(fval+" "+dval);
+                $("#sec1").val(fval);
+              }
+            }
+            for(j=0;j<timea.length;j++) {
+              if(value3==timea[j]) {
+                var nval=valNum*timem[i];
+                var fval=nval/timem[j];
+                //alert(fval+" "+dval);
+                $("#hr1").val(fval);
+              }
+            }
+          }
+        }
+        value1="";
+        value2="";
+  }
     </script>
   </body>
 </html>
